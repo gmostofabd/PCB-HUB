@@ -1,0 +1,1638 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PCB HUB</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================================
+   ROOT
+========================================= */
+
+:root{
+
+    --bg:#050816;
+    --card:#0d1325;
+    --card2:#101a31;
+
+    --primary:#00ffb3;
+    --primary2:#00c896;
+
+    --text:#ffffff;
+    --muted:#aab5d6;
+
+    --border:#1d315f;
+
+    --shadow:
+    0 0 35px rgba(0,255,179,0.08);
+
+}
+
+/* =========================================
+   GLOBAL
+========================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:'Inter',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    overflow-x:hidden;
+
+}
+
+/* =========================================
+   BACKGROUND
+========================================= */
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+    inset:0;
+
+    background:
+
+    radial-gradient(circle at 20% 20%, rgba(0,255,179,0.08), transparent 25%),
+    radial-gradient(circle at 80% 30%, rgba(0,150,255,0.08), transparent 25%),
+    radial-gradient(circle at 50% 80%, rgba(0,255,120,0.06), transparent 25%);
+
+    z-index:-3;
+
+}
+
+.tech-grid{
+
+    position:fixed;
+    inset:0;
+
+    background-image:
+
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+
+    background-size:42px 42px;
+
+    z-index:-2;
+
+}
+
+/* =========================================
+   NAVBAR
+========================================= */
+
+nav{
+
+    position:fixed;
+    top:0;
+    left:0;
+
+    width:100%;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:18px 7%;
+
+    background:rgba(0,0,0,0.35);
+
+    backdrop-filter:blur(14px);
+
+    border-bottom:1px solid rgba(255,255,255,0.05);
+
+    z-index:9999;
+
+}
+
+.logo{
+
+    color:var(--primary);
+
+    font-size:1.5rem;
+    font-weight:800;
+
+    letter-spacing:2px;
+
+}
+
+nav ul{
+
+    display:flex;
+    list-style:none;
+
+    gap:30px;
+
+}
+
+nav ul li a{
+
+    color:white;
+    text-decoration:none;
+
+    transition:0.3s;
+
+}
+
+nav ul li a:hover{
+
+    color:var(--primary);
+
+}
+
+/* =========================================
+   HERO
+========================================= */
+
+.hero{
+
+    min-height:100vh;
+
+    display:flex;
+    flex-direction:column;
+
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    padding:120px 20px 80px;
+
+}
+
+.hero-badge{
+
+    padding:12px 22px;
+
+    border-radius:999px;
+
+    background:rgba(0,255,179,0.08);
+
+    border:1px solid rgba(0,255,179,0.25);
+
+    color:var(--primary);
+
+    font-size:14px;
+    font-weight:700;
+
+    margin-bottom:30px;
+
+}
+
+.hero h1{
+
+    font-size:5rem;
+    line-height:1.05;
+
+    max-width:1100px;
+
+    margin-bottom:28px;
+
+}
+
+.hero h1 span{
+
+    color:var(--primary);
+
+}
+
+.hero p{
+
+    max-width:900px;
+
+    color:var(--muted);
+
+    line-height:2;
+
+    font-size:1.08rem;
+
+    margin-bottom:45px;
+
+}
+
+.hero-buttons{
+
+    display:flex;
+    flex-wrap:wrap;
+
+    gap:18px;
+
+    justify-content:center;
+
+}
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.btn{
+
+    padding:16px 32px;
+
+    border-radius:16px;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    transition:0.3s;
+
+}
+
+.btn-primary{
+
+    background:var(--primary);
+
+    color:black;
+
+}
+
+.btn-primary:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:
+    0 0 25px rgba(0,255,179,0.3);
+
+}
+
+.btn-secondary{
+
+    border:1px solid rgba(0,255,179,0.3);
+
+    color:var(--primary);
+
+    background:rgba(0,255,179,0.05);
+
+}
+
+.btn-secondary:hover{
+
+    background:var(--primary);
+    color:black;
+
+}
+
+/* =========================================
+   STATS
+========================================= */
+
+.stats{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
+
+    gap:25px;
+
+    padding:0 7% 100px;
+
+}
+
+.stat{
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:26px;
+
+    padding:35px;
+
+    transition:0.3s;
+
+}
+
+.stat:hover{
+
+    transform:translateY(-8px);
+
+    border-color:var(--primary);
+
+    box-shadow:var(--shadow);
+
+}
+
+.stat h2{
+
+    color:var(--primary);
+
+    font-size:3rem;
+
+    margin-bottom:10px;
+
+}
+
+.stat p{
+
+    color:var(--muted);
+
+}
+
+/* =========================================
+   SECTION
+========================================= */
+
+section{
+
+    padding:100px 7%;
+
+}
+
+.section-title{
+
+    text-align:center;
+
+    margin-bottom:70px;
+
+}
+
+.section-title h2{
+
+    font-size:3rem;
+
+    margin-bottom:18px;
+
+}
+
+.section-title p{
+
+    max-width:850px;
+
+    margin:auto;
+
+    color:var(--muted);
+
+    line-height:1.9;
+
+}
+
+/* =========================================
+   SEARCH
+========================================= */
+
+.search-wrapper{
+
+    max-width:850px;
+
+    margin:0 auto 40px auto;
+
+}
+
+.search-wrapper input{
+
+    width:100%;
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    padding:20px 22px;
+
+    color:white;
+
+    outline:none;
+
+    font-size:1rem;
+
+}
+
+.search-wrapper input:focus{
+
+    border-color:var(--primary);
+
+}
+
+/* =========================================
+   FILTERS
+========================================= */
+
+.filters{
+
+    display:flex;
+    flex-wrap:wrap;
+
+    justify-content:center;
+
+    gap:16px;
+
+    margin-bottom:60px;
+
+}
+
+.filter-btn{
+
+    padding:12px 22px;
+
+    border-radius:14px;
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+    font-weight:700;
+
+}
+
+.filter-btn.active,
+.filter-btn:hover{
+
+    background:var(--primary);
+
+    color:black;
+
+}
+
+/* =========================================
+   GRID
+========================================= */
+
+.pcb-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(340px,1fr));
+
+    gap:35px;
+
+}
+
+/* =========================================
+   CARD
+========================================= */
+
+.pcb-card{
+
+    background:
+    linear-gradient(
+    180deg,
+    var(--card2),
+    var(--card)
+    );
+
+    border:1px solid var(--border);
+
+    border-radius:28px;
+
+    overflow:hidden;
+
+    transition:0.35s;
+
+}
+
+.pcb-card:hover{
+
+    transform:translateY(-10px);
+
+    border-color:var(--primary);
+
+    box-shadow:var(--shadow);
+
+}
+
+.card-image{
+
+    height:240px;
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.card-image img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    transition:0.4s;
+
+}
+
+.pcb-card:hover img{
+
+    transform:scale(1.06);
+
+}
+
+.card-category{
+
+    position:absolute;
+
+    top:16px;
+    left:16px;
+
+    padding:8px 14px;
+
+    border-radius:999px;
+
+    background:var(--primary);
+
+    color:black;
+
+    font-size:12px;
+    font-weight:800;
+
+}
+
+.card-content{
+
+    padding:28px;
+
+}
+
+.card-content h3{
+
+    font-size:1.45rem;
+
+    margin-bottom:14px;
+
+}
+
+.card-content p{
+
+    color:var(--muted);
+
+    line-height:1.8;
+
+    margin-bottom:24px;
+
+}
+
+.tags{
+
+    display:flex;
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    margin-bottom:26px;
+
+}
+
+.tag{
+
+    padding:8px 14px;
+
+    border-radius:999px;
+
+    background:#16284c;
+
+    color:#8fc8ff;
+
+    font-size:12px;
+    font-weight:700;
+
+}
+
+.card-buttons{
+
+    display:flex;
+
+    gap:15px;
+
+}
+
+.card-buttons button{
+
+    flex:1;
+
+    border:none;
+
+    padding:14px;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    font-weight:700;
+
+    transition:0.3s;
+
+}
+
+.preview-btn{
+
+    background:var(--primary);
+
+}
+
+.download-btn{
+
+    background:#16284c;
+
+    color:white;
+
+}
+
+.card-buttons button:hover{
+
+    opacity:0.85;
+
+}
+
+/* =========================================
+   FEATURES
+========================================= */
+
+.feature-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(280px,1fr));
+
+    gap:30px;
+
+}
+
+.feature{
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:26px;
+
+    padding:35px;
+
+    transition:0.3s;
+
+}
+
+.feature:hover{
+
+    transform:translateY(-8px);
+
+    border-color:var(--primary);
+
+}
+
+.feature-icon{
+
+    font-size:3rem;
+
+    margin-bottom:20px;
+
+}
+
+.feature h3{
+
+    color:var(--primary);
+
+    margin-bottom:14px;
+
+}
+
+.feature p{
+
+    color:var(--muted);
+
+    line-height:1.8;
+
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer{
+
+    padding:70px 7%;
+
+    border-top:1px solid rgba(255,255,255,0.05);
+
+    text-align:center;
+
+}
+
+footer h2{
+
+    color:var(--primary);
+
+    margin-bottom:14px;
+
+}
+
+footer p{
+
+    color:var(--muted);
+
+    line-height:1.8;
+
+    margin-bottom:24px;
+
+}
+
+.footer-links{
+
+    display:flex;
+    justify-content:center;
+
+    gap:24px;
+
+    flex-wrap:wrap;
+
+}
+
+.footer-links a{
+
+    color:white;
+
+    text-decoration:none;
+
+    transition:0.3s;
+
+}
+
+.footer-links a:hover{
+
+    color:var(--primary);
+
+}
+
+/* =========================================
+   MODAL
+========================================= */
+
+.modal{
+
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,0.8);
+
+    display:none;
+
+    justify-content:center;
+    align-items:center;
+
+    padding:20px;
+
+    z-index:99999;
+
+}
+
+.modal-content{
+
+    width:100%;
+    max-width:1100px;
+
+    background:var(--card);
+
+    border:1px solid var(--primary);
+
+    border-radius:28px;
+
+    overflow:hidden;
+
+    animation:popup 0.3s ease;
+
+}
+
+@keyframes popup{
+
+    from{
+        transform:scale(0.9);
+        opacity:0;
+    }
+
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+
+}
+
+.modal-image{
+
+    height:430px;
+
+}
+
+.modal-image img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+.modal-body{
+
+    padding:35px;
+
+}
+
+.modal-body h2{
+
+    margin-bottom:18px;
+
+}
+
+.modal-body p{
+
+    color:var(--muted);
+
+    line-height:1.9;
+
+    margin-bottom:30px;
+
+}
+
+.modal-links{
+
+    display:flex;
+    flex-wrap:wrap;
+
+    gap:16px;
+
+}
+
+.modal-links a{
+
+    padding:15px 24px;
+
+    border-radius:14px;
+
+    background:var(--primary);
+
+    color:black;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+}
+
+.close{
+
+    position:absolute;
+
+    top:20px;
+    right:20px;
+
+    width:46px;
+    height:46px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:var(--primary);
+
+    cursor:pointer;
+
+    font-size:20px;
+
+}
+
+/* =========================================
+   EMPTY
+========================================= */
+
+.empty-state{
+
+    grid-column:1/-1;
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:26px;
+
+    padding:70px 20px;
+
+    text-align:center;
+
+}
+
+.empty-state h2{
+
+    color:var(--primary);
+
+    margin-bottom:10px;
+
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media(max-width:900px){
+
+    nav ul{
+        display:none;
+    }
+
+    .hero h1{
+        font-size:3rem;
+    }
+
+    .section-title h2{
+        font-size:2.2rem;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .hero h1{
+        font-size:2.3rem;
+    }
+
+    .modal-image{
+        height:260px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="tech-grid"></div>
+
+<!-- =========================================
+     NAVBAR
+========================================= -->
+
+<nav>
+
+<div class="logo">
+PCB HUB
+</div>
+
+<ul>
+
+<li><a href="#">Home</a></li>
+<li><a href="#gallery">Gallery</a></li>
+<li><a href="#features">Features</a></li>
+<li><a href="#">Projects</a></li>
+<li><a href="#">GitHub</a></li>
+
+
+</ul>
+
+</nav>
+
+<!-- =========================================
+     HERO
+========================================= -->
+
+<section class="hero">
+
+<div class="hero-badge">
+OPEN SOURCE PCB ENGINEERING COLLECTION
+</div>
+
+<h1>
+Professional <span>PCB Design</span> Reference Platform
+</h1>
+
+<p>
+
+Explore real-world PCB layouts, routing strategies,
+Gerber files, schematics, KiCad projects and
+embedded hardware references for engineering students.
+
+</p>
+
+<div class="hero-buttons">
+
+<a href="#gallery" class="btn btn-primary">
+Explore Library
+</a>
+
+<a href="#features" class="btn btn-secondary">
+Features
+</a>
+
+</div>
+
+</section>
+
+<!-- =========================================
+     STATS
+========================================= -->
+
+<div class="stats">
+
+<div class="stat">
+<h2>250+</h2>
+<p>PCB Layouts</p>
+</div>
+
+<div class="stat">
+<h2>120+</h2>
+<p>Schematics</p>
+</div>
+
+<div class="stat">
+<h2>80+</h2>
+<p>Gerber Packages</p>
+</div>
+
+<div class="stat">
+<h2>50+</h2>
+<p>Hardware Projects</p>
+</div>
+
+</div>
+
+<!-- =========================================
+     GALLERY
+========================================= -->
+
+<section id="gallery">
+
+<div class="section-title">
+
+<h2>
+PCB Engineering Gallery
+</h2>
+
+<p>
+
+Browse real PCB layout examples and learn
+professional routing, grounding and hardware design practices.
+
+</p>
+
+</div>
+
+<div class="search-wrapper">
+
+<input
+type="text"
+id="searchInput"
+placeholder="Search PCB projects, ESP32, STM32, RF, Audio..."
+>
+
+</div>
+
+<div class="filters">
+
+<button class="filter-btn active" data-filter="all">
+All
+</button>
+
+<button class="filter-btn" data-filter="microcontroller">
+Microcontroller
+</button>
+
+<button class="filter-btn" data-filter="power">
+Power
+</button>
+
+<button class="filter-btn" data-filter="rf">
+RF
+</button>
+
+<button class="filter-btn" data-filter="audio">
+Audio
+</button>
+
+</div>
+
+<div class="pcb-grid" id="pcbGrid"></div>
+
+</section>
+
+<!-- =========================================
+     FEATURES
+========================================= -->
+
+<section id="features">
+
+<div class="section-title">
+
+<h2>
+Platform Features
+</h2>
+
+<p>
+
+Built specifically for engineering students and embedded developers.
+
+</p>
+
+</div>
+
+<div class="feature-grid">
+
+<div class="feature">
+
+<div class="feature-icon">
+⚡
+</div>
+
+<h3>
+Professional PCB References
+</h3>
+
+<p>
+
+Study grounding, routing, filtering,
+power distribution and manufacturing techniques.
+
+</p>
+
+</div>
+
+<div class="feature">
+
+<div class="feature-icon">
+📁
+</div>
+
+<h3>
+Download Design Files
+</h3>
+
+<p>
+
+Access Gerber files, schematics,
+KiCad projects and hardware resources.
+
+</p>
+
+</div>
+
+<div class="feature">
+
+<div class="feature-icon">
+🎓
+</div>
+
+<h3>
+Engineering Learning Platform
+</h3>
+
+<p>
+
+Learn practical PCB design concepts
+through real engineering projects.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<footer>
+
+<h2>
+PCB HUB
+</h2>
+
+<p>
+
+Open-source PCB engineering resource platform
+for electronics learners and hardware developers.
+
+</p>
+
+<div class="footer-links">
+
+<a href="#">
+GitHub
+</a>
+
+<a href="#">
+Projects
+</a>
+
+<a href="#">
+Documentation
+</a>
+
+</div>
+
+</footer>
+
+<!-- =========================================
+     MODAL
+========================================= -->
+
+<div class="modal" id="modal">
+
+<button class="close" onclick="closeModal()">
+×
+</button>
+
+<div class="modal-content">
+
+<div class="modal-image">
+
+<img id="modalImg" src="">
+
+</div>
+
+<div class="modal-body">
+
+<h2 id="modalTitle"></h2>
+
+<p id="modalDesc"></p>
+
+<div class="modal-links">
+
+<a id="githubLink" href="#" target="_blank">
+Open GitHub
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- =========================================
+     JAVASCRIPT
+========================================= -->
+
+<script>
+
+/* =========================================
+   PCB DATABASE
+========================================= */
+
+const pcbProjects = [
+
+{
+    id:"keypad",
+
+    title:"4x4 Keypad Matrix PCB",
+
+    category:"microcontroller",
+
+    image:
+    "https://raw.githubusercontent.com/gmostofabd/Proteus-Circuits-to-PCB/main/4x4%20Keypad%20Matix/Screen%20Shots/PCB%20Layout.png",
+
+    description:
+    "Compact keypad interface PCB designed using Proteus PCB Suite.",
+
+    tags:["8051","Keypad","Proteus"],
+
+    github:
+    "https://github.com/gmostofabd/Proteus-Circuits-to-PCB/tree/main/4x4%20Keypad%20Matix"
+},
+
+{
+    id:"adc0804",
+
+    title:"ADC0804 Development Board",
+
+    category:"microcontroller",
+
+    image:
+    "https://raw.githubusercontent.com/gmostofabd/Proteus-Circuits-to-PCB/main/ADC0804%20Board/Rendering/PCB_Routs.png",
+
+    description:
+    "ADC0804 based analog to digital converter PCB board.",
+
+    tags:["ADC0804","8051","ADC"],
+
+    github:
+    "https://github.com/gmostofabd/Proteus-Circuits-to-PCB/tree/main/ADC0804%20Board"
+},
+
+{
+    id: "at51_dev_board",
+
+    title: "AT51 Development Board PCB",
+
+    category: "microcontroller",
+
+    image:
+    "https://raw.githubusercontent.com/gmostofabd/AT51-Dev-Board/main/assets/images/AT51_PCB.png",
+
+    description:
+    "AT51 based 8051 development board PCB layout and routing design.",
+
+    tags: ["AT51", "8051", "Development Board", "PCB"],
+
+    github:
+    "https://github.com/gmostofabd/AT51-Dev-Board"
+},
+
+{
+    id:"audio",
+
+    title:"Class-D Audio Amplifier",
+
+    category:"audio",
+
+    image:
+    "https://images.unsplash.com/photo-1555617981-dac3880eac6e?q=80&w=1200&auto=format&fit=crop",
+
+    description:
+    "Professional low-noise amplifier PCB design.",
+
+    tags:["Audio","Amplifier","PCB"],
+
+    github:"#"
+}
+
+];
+
+/* =========================================
+   ELEMENTS
+========================================= */
+
+const pcbGrid =
+document.getElementById("pcbGrid");
+
+const searchInput =
+document.getElementById("searchInput");
+
+const filterButtons =
+document.querySelectorAll(".filter-btn");
+
+const modal =
+document.getElementById("modal");
+
+/* =========================================
+   RENDER
+========================================= */
+
+function renderProjects(){
+
+    pcbGrid.innerHTML="";
+
+    const searchValue =
+    searchInput.value.toLowerCase();
+
+    const activeFilter =
+    document.querySelector(".filter-btn.active")
+    .dataset.filter;
+
+    const filteredProjects =
+
+    pcbProjects.filter(project=>{
+
+        const matchSearch =
+
+        project.title.toLowerCase().includes(searchValue)
+        ||
+
+        project.tags.join(" ")
+        .toLowerCase()
+        .includes(searchValue);
+
+        const matchFilter =
+
+        activeFilter==="all"
+        ||
+
+        project.category===activeFilter;
+
+        return matchSearch && matchFilter;
+
+    });
+
+    if(filteredProjects.length===0){
+
+        pcbGrid.innerHTML=
+
+        `
+        <div class="empty-state">
+
+            <h2>No PCB Found</h2>
+
+            <p>
+            Try another search keyword.
+            </p>
+
+        </div>
+        `;
+
+        return;
+    }
+
+    filteredProjects.forEach(project=>{
+
+        const tagsHTML =
+
+        project.tags.map(tag=>
+
+        `<div class="tag">${tag}</div>`
+
+        ).join("");
+
+        const card =
+
+        `
+        <div class="pcb-card">
+
+            <div class="card-image">
+
+                <img
+                src="${project.image}"
+                alt="${project.title}"
+                loading="lazy"
+                >
+
+                <div class="card-category">
+                    ${project.category.toUpperCase()}
+                </div>
+
+            </div>
+
+            <div class="card-content">
+
+                <h3>
+                ${project.title}
+                </h3>
+
+                <p>
+                ${project.description}
+                </p>
+
+                <div class="tags">
+                    ${tagsHTML}
+                </div>
+
+                <div class="card-buttons">
+
+                    <button
+                    class="preview-btn"
+                    data-id="${project.id}"
+                    >
+                    Preview
+                    </button>
+
+                    <button
+                    class="download-btn"
+                    onclick="window.open('${project.github}')"
+                    >
+                    GitHub
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+        `;
+
+        pcbGrid.innerHTML += card;
+
+    });
+
+    attachPreviewEvents();
+
+}
+
+/* =========================================
+   FILTERS
+========================================= */
+
+filterButtons.forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+        filterButtons.forEach(btn=>{
+
+            btn.classList.remove("active");
+
+        });
+
+        button.classList.add("active");
+
+        renderProjects();
+
+    });
+
+});
+
+/* =========================================
+   SEARCH
+========================================= */
+
+searchInput.addEventListener("input",renderProjects);
+
+/* =========================================
+   PREVIEW EVENTS
+========================================= */
+
+function attachPreviewEvents(){
+
+    document
+    .querySelectorAll(".preview-btn")
+    .forEach(button=>{
+
+        button.addEventListener("click",()=>{
+
+            const id =
+            button.dataset.id;
+
+            const project =
+            pcbProjects.find(
+            p=>p.id===id
+            );
+
+            openModal(project);
+
+        });
+
+    });
+
+}
+
+/* =========================================
+   MODAL
+========================================= */
+
+function openModal(project){
+
+    document.getElementById("modalTitle")
+    .innerText = project.title;
+
+    document.getElementById("modalImg")
+    .src = project.image;
+
+    document.getElementById("modalDesc")
+    .innerText = project.description;
+
+    document.getElementById("githubLink")
+    .href = project.github;
+
+    modal.style.display="flex";
+
+    document.body.style.overflow="hidden";
+
+}
+
+function closeModal(){
+
+    modal.style.display="none";
+
+    document.body.style.overflow="auto";
+
+}
+
+window.addEventListener("click",(e)=>{
+
+    if(e.target===modal){
+
+        closeModal();
+
+    }
+
+});
+
+/* =========================================
+   INITIALIZE
+========================================= */
+
+renderProjects();
+
+</script>
+
+</body>
+</html>
